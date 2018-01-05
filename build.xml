@@ -1,0 +1,194 @@
+<project name="MIC9Bench" default="compile" basedir=".">
+  <description>
+    build file for MIC9Bench
+  </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="compile.source" value="1.9"/>
+  <property name="compile.target" value="1.9"/>
+  <property name="mic9bench.build" value="${build}/mic9bench.annotation"/>
+
+
+
+<taskdef resource="net/sf/antcontrib/antlib.xml">
+  <classpath>
+    <fileset dir="${basedir}/ant.lib/ant-contrib"/>
+  </classpath>
+</taskdef>
+
+
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+
+  <target name="compileAnnotation" depends="init" description="compile mic9bench.annotation">
+        <javac 
+           modulesourcepath="${src}/benchmark" 
+           destdir="${build}"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}"
+           source="${compile.source}"
+           target="${compile.target}"
+           includeAntRuntime="false">
+         </javac>
+  </target>
+
+
+  <target description="compile fields test cases" name="compileFields" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/fields" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/fields/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/fields/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>
+
+
+  <target description="compile methods test cases" name="compileMethods" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/methods" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/methods/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/methods/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>
+
+
+
+  <target description="compile callback test cases" name="compileCallback" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/callback" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/callback/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/callback/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>
+
+
+
+  <target description="compile exception test cases" name="compileException" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/exception" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/exception/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/exception/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>
+
+
+
+  <target description="compile method_parameter test cases" name="compileParameter" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/method_parameter" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/method_parameter/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/method_parameter/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>  
+
+
+  <target description="compile reflection_invoke test cases" name="compileRefInvoke" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/reflection_invoke" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/reflection_invoke/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/reflection_invoke/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>    
+
+  <target name="compile" depends="compileMethods,compileParameter,compileCallback,compileFields,compileRefInvoke,compileException"
+        description="compile the source">
+    <!-- Compile the java code from ${src} into ${build} -->
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution">
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/MIC9Bench-${DSTAMP}.jar" basedir="${build}"/>
+  </target>
+
+    <target name="dist-src" 
+        description="generate the source distribution">
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+    <!-- Put everything in ${src} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/MIC9Bench-src.jar" basedir="${basedir}" excludes="build/**, dist/**" />
+  </target>
+
+  <target name="clean"
+        description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
