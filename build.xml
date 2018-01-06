@@ -163,7 +163,26 @@
     </for>
   </target>    
 
-  <target name="compile" depends="compileMethods,compileParameter,compileCallback,compileFields,compileRefInvoke,compileException"
+
+  <target description="compile side_effects test cases" name="compileSide" depends="compileAnnotation">
+    <for param="subdir">
+      <dirset dir="${src}/side_effects" includes="*"/>
+      <sequential>
+      <var name="filename" unset="true"/>
+      <basename property="filename" file="@{subdir}"/>
+        <mkdir dir="${build}/side_effects/${filename}"/>
+        <javac debug="${compile.debug}" 
+          deprecation="${compile.deprecation}" 
+          destdir="${build}/side_effects/${filename}" 
+          includeAntRuntime="false" 
+          modulesourcepath="@{subdir}" 
+          source="${compile.source}" 
+          target="${compile.target}"
+          modulepath="${mic9bench.build}"/>
+      </sequential>
+    </for>
+  </target>   
+  <target name="compile" depends="compileMethods,compileParameter,compileCallback,compileFields,compileRefInvoke,compileException,compileSide"
         description="compile the source">
     <!-- Compile the java code from ${src} into ${build} -->
   </target>
