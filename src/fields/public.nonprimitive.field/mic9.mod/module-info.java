@@ -1,1 +1,1 @@
-module mic9.mod{     exports api;    requires java.logging;    requires  mic9bench.annotation;}
+module mic9.mod{     exports api;    requires  mic9bench.annotation;}

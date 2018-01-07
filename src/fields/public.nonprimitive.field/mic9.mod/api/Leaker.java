@@ -1,12 +1,12 @@
 package api;
-import java.util.logging.Logger;
+import javax.crypto.spec.SecretKeySpec;
 import mic9bench.annotation.Critical;
 
 
 public class Leaker {
 
     @Critical(path="Leaker.secretField", type=Critical.ViolationType.BOTH)
- 	public Logger secretField = Logger.getLogger("Leaker");
+    public SecretKeySpec key = new SecretKeySpec("hi".getBytes(),"AES");
 
 
 
