@@ -1,18 +1,17 @@
 package api;
 
-import internal.LeakerImpl;
-import internal.InternA;
+import internal.InternAImpl;
 import java.lang.invoke.*;
 import java.lang.reflect.*;
 
-public class LeakerFactory {
+public class AFactory {
 
 	private static MethodHandles.Lookup lookup = MethodHandles.lookup();
 
-    public static Leaker getInstance(){
+    public static AInterface getInstance(){
 
     
-    		return new LeakerImpl();
+    		return new InternAImpl();
     
     }
 

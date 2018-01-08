@@ -1,7 +1,7 @@
 package api;
 
 
-public interface A{
+public interface AInterface{
 
 
 	public void callback(Object par);
