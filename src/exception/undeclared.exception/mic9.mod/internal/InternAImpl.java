@@ -1,19 +1,19 @@
 package internal;
 
-import api.Leaker;
+import api.AInterface;
 
-import api.LeakException;
+import api.Exception1;
 
 
 import mic9bench.annotation.Critical;
 
-public class LeakerImpl implements Leaker{
+public class InternAImpl implements AInterface{
 
     @Critical(path="LeakException.o", type=Critical.ViolationType.CONFIDENTIALITY)
     private byte[] secret = new byte[]{1,2,3,4,5,6};
 
     @Override
-    public void leak(String parameter) throws LeakException{
+    public void methodThrowingException(String parameter){
         internalMethod();
     }
 
@@ -21,6 +21,6 @@ public class LeakerImpl implements Leaker{
     private void internalMethod(){
     	System.out.println("internal Method called!");
     	
-    	throw new LeakException(this.secret);
+    	throw new Exception1(this.secret);
     }
 }
