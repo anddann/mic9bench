@@ -10,12 +10,12 @@ public class LeakerFactory {
 
 
    
-   public static void leak(Context parameter, boolean value) {
+   public static void leak(CallbackInterface parameter, boolean value) {
 
    		Servlet servlet = new CritServlet();
 
 
-        parameter.callback(servlet);
+        parameter.callbackMethod(servlet);
  
     }
 }
