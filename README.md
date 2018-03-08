@@ -1,7 +1,7 @@
 # [](#mic9bench---a-module-integrity-and-confidentiality-for-java-9-analysis-benchmark-suite)MIC9Bench - An Integrity and Confidentiality for Java 9 Modules Analysis Benchmark Suite 
 
 
-MIC9Bench (module, integrity, confidentiality for Java 9) is an open benchmark suite for evaluating static analyses wrt. integrity and confidentiality violations of Java 9 modules.
+MIC9Bench (module, integrity, confidentiality for Java 9) is an open benchmark suite for evaluating static analyses w.r.t. integrity and confidentiality violations of Java 9 modules.
 Therefore, MIC9Bench provides various types of modules' confidentiality and integrity violations (1) and the ground truth that holds the information where the violation occurs (2).
 
 
@@ -78,7 +78,7 @@ The annotations is defined in the module `mic9bench.annotation`, which must be o
 
 Additionally, the annotation `@Critical(path="Leak.field", type=ViolationType.INTEGRITY);`  defines the statement at which the test is conducted and contains the ground truth. 
 The first argument, `"Leak.field"` is the access path for which the violation may occur, e.g., the field `field` of class `Leak`. 
-The second argument specifies whether  an `INTEGRITY`, `CONFIDENTIALITY`, `BOTH`, or `NONE` violation occurs wrt. the marked allocation site.
+The second argument specifies whether  an `INTEGRITY`, `CONFIDENTIALITY`, `BOTH`, or `NONE` violation occurs w.r.t. the marked allocation site.
 
 ### [](#how-to-test-a-module-analysis)How to test a Confidentiality and Integrity Java 9 Module Analysis
 
