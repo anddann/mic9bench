@@ -71,9 +71,9 @@ The test cases contain special annotations (see instructions below). The stateme
 ### [](#instructions-on-special-annotations)Instructions on Annotations
 
 The annotation `@Critical` marks sensitive entities to analyze with respect to integrity or confidentiality violations.
-Thus, the annotation describe the test cases variable and allocation site directly within the test program's code. 
+Thus, the annotation describes the test case's variable and allocation site directly within the test program's code. 
 To use this benchmark, the appropriate information must be parsed from this annotation.
-The annotations is defined in the module `mic9bench.annotation`, which must be on the module-path while compiling the test suite.
+The annotations are defined in the module `mic9bench.annotation`, which must be on the module-path while compiling the test suite.
 
 
 Additionally, the annotation `@Critical(path="Leak.field", type=ViolationType.INTEGRITY);`  defines the statement at which the test is conducted and contains the ground truth. 
